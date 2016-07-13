@@ -1,6 +1,6 @@
 {
   "name": "fly-pug",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pug plugin for Fly.",
   "license": "WTFPL",
   "bugs": {
