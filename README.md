@@ -26,7 +26,7 @@
 This plugin requires [Fly][] .
 
 ```bash
-    npm i -D fly-pug
+npm i -D fly-pug
 ```
 
 ## Usage
@@ -34,27 +34,27 @@ This plugin requires [Fly][] .
 Async/Await flavored:
 
 ```js
-    export async function pagu () {
-      await this
-          .source('src/*.pug')
-          .pug()
-          // or pass your options to pug
-          // .pug({pretty: true})
-          .target('dist')
-    }
+export async function pagu () {
+  await this
+    .source('src/*.pug')
+    .pug()
+    // or pass your options to pug
+    // .pug({pretty: true})
+    .target('dist')
+}
 ```
 
 Generator function flavored:
 
 ```js
-    exports.pagu = function* () {
-      yield this
-          .source('src/*.pug')
-          .pug()
-          // or pass your options to pug
-          // .pug({pretty: true})
-          .target('dist')
-    }
+exports.pagu = function* () {
+  yield this
+    .source('src/*.pug')
+    .pug()
+    // or pass your options to pug
+    // .pug({pretty: true})
+    .target('dist')
+}
 ```
 
 Check out Pug [documentation][] for available options.
