@@ -1,12 +1,20 @@
-const path = require('path')
-const pug = require('pug')
+const { join } = require('path')
+const { render } = require('pug')
 
-module.exports = function flyPug () {
-  return this.filter('pug', function plugin (data, options) {
+module.exports = function (fly) {
+  fly.plugin('pug', {}, function * (file, options) {
     if (!options.filename) {
-      options.filename = path.resolve(path.join(options.file.dir, options.file.base))
+      options.filename = join(file.dir, file.base)
     }
-    delete options.file
-    return { ext: '.html', code: pug.render(data.toString(), options) }
+    try {
+      const result = render(file.data.toString(), options)
+      file.data = Buffer(result)
+      file.base = file.base.replace(/\.pug$/, '.html')
+    } catch (error) {
+      fly.emit('plugin_error', {
+        plugin: 'fly-pug',
+        error: error.message
+      })
+    }
   })
 }

@@ -1,21 +1,26 @@
+import Fly from 'fly'
+import { extname, join } from 'path'
 import test from 'ava'
-import { readFileSync } from 'fs'
 
 import flyPug from '../'
 
-const fly = {
-  filter (name, plugin) {
-    this[name] = plugin
-  }
-}
-
-flyPug.call(fly)
-
-test('rendering', t => {
-  const data = readFileSync('assert.pug')
-  const options = { file: { base: 'assert.pug', dir: '' } }
-  t.deepEqual(fly.pug(data, options), {
-    ext: '.html',
-    code: '<!DOCTYPE html><html lang="en"></html><head><meta charset="UTF-8"/><title>Oh Pug</title></head><body><h1>Oh my body</h1></body>'
+test('rendering', async t => {
+  const fly = new Fly({
+    plugins: [
+      flyPug
+    ],
+    tasks: {
+      * test (self) {
+        yield self.source(join(__dirname, 'assert.pug'))
+          .pug()
+          .run({
+            * func (file) {
+              t.is(file.data.toString(), '<!DOCTYPE html><html lang="en"></html><head><meta charset="UTF-8"/><title>Oh Pug</title></head><body><h1>Oh my body</h1></body>')
+              t.is(extname(file.base), '.html')
+            }
+          })
+      }
+    }
   })
+  await fly.start('test')
 })
