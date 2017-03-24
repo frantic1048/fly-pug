@@ -8,7 +8,7 @@ module.exports = function (fly) {
     }
     try {
       const result = render(file.data.toString(), options)
-      file.data = Buffer(result)
+      file.data = Buffer.from(result)
       file.base = file.base.replace(/\.pug$/, '.html')
     } catch (error) {
       fly.emit('plugin_error', {
