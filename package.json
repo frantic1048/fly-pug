@@ -31,12 +31,12 @@
     "pug": "^2.0.0-beta3"
   },
   "devDependencies": {
-    "ava": "^0.15.2",
-    "eslint": "^3.0.1",
-    "eslint-config-standard": "^5.3.1",
-    "eslint-plugin-promise": "^1.3.2",
-    "eslint-plugin-standard": "^2.0.0",
-    "fly": "^2.0.3"
+    "ava": "^0.18.2",
+    "eslint": "^3.18.0",
+    "eslint-config-standard": "^7.1.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^2.1.1",
+    "fly": "^2.0.5"
   },
   "engines": {
     "node": ">= 6"
